@@ -1,10 +1,9 @@
 {% extends "chat/base.html" %}
-{% block title %}Login {% endblock %}
+{% block title %}Create a Post{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
     <form method="post">
     {% csrf_token %} {{ form|crispy }}
-        <p>Don't have an account? Create one <a href='/sign-up'>Here</a>!</p>
-        <button type="submit" class="btn btn-success">Login</button>
+        <button type="submit" class="btn btn-success">Post</button>
     </form>
 {% endblock %}
