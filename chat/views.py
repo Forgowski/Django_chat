@@ -7,8 +7,13 @@ from .models import Post
 
 @login_required(login_url='/login')
 def home(request):
-    post = Post.objects.all()
-    return render(request, 'chat/home.html', {"post": post})
+    posts = Post.objects.all()
+    if request.method == "POST":
+        post_id = request.POST.get("post-id")
+        post = Post.objects.filter(id=post_id).first()
+        if post and post.author == request.user:
+            post.delete()
+    return render(request, 'chat/home.html', {"posts": posts})
 # Create your views here.
 
 
