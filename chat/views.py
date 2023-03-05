@@ -30,7 +30,6 @@ def home(request):
                 except:
                     pass
 
-
     return render(request, 'chat/home.html', {"posts": posts})
 # Create your views here.
 

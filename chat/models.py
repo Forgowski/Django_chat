@@ -12,4 +12,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title + '\n' + self.description
 
-# Create your models here.
+
+class Room(models.Model):
+    name = models.CharField(max_length=255)
+    owner = models.CharField(max_length=255)
