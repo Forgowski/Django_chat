@@ -64,4 +64,5 @@ def sign_up(request):
 
 @login_required(login_url='/login')
 def chat(request):
-    pass
+    context = {}
+    return render(request, "chat/chat.html", context)
