@@ -3,7 +3,7 @@ from .forms import RegisterForm, PostForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, permission_required
-from .models import Post
+from .models import Post, Room
 
 
 @login_required(login_url='/login')
@@ -60,3 +60,8 @@ def sign_up(request):
         form = RegisterForm()
 
     return render(request, 'registration/sign_up.html', {"form": form})
+
+
+@login_required(login_url='/login')
+def chat(request):
+    pass
