@@ -63,6 +63,5 @@ def sign_up(request):
 
 
 @login_required(login_url='/login')
-def chat(request):
-    context = {}
-    return render(request, "chat/chat.html", context)
+def room(request, room_name):
+    return render(request, "chat/room.html", {"room_name": room_name})
