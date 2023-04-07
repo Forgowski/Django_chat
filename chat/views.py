@@ -62,8 +62,8 @@ def sign_up(request):
     return render(request, 'registration/sign_up.html', {"form": form})
 
 
+@login_required(login_url='/login')
 def chat_page(request, *args, **kwargs):
-    if not request.user.is_authenticated:
-        return redirect("login-user")
+
     context = {}
     return render(request, "chat/chat_page.html", context)
