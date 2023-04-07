@@ -3,20 +3,16 @@
     <!DOCTYPE html>
     <html>
     <body>
-    <div style="text-align: center;"><h1>Hello , Welcome to my chat site ! {{ request.user }}</h1></div>
-    <div
-            class="chat__item__container"
-            id="id_chat_item_container"
-            style="font-size: 20px"
-    >
+    <div style="text-align: center;"><h1>Hello , Welcome to my chat site {{ request.user }}!</h1></div>
 
-        <textarea disabled id="messages_box" name="message area" rows="4" cols="120">
-    </textarea><br/>
 
-        <input type="text" id="id_message_send_input" style="width: 1125px"/>
-        <button type="submit" id="id_message_send_button">Send Message</button>
-        <br/>
-        <br/>
+    <textarea disabled id="messages_box" name="message area" rows="25" cols="120" style="margin: 0 auto ;"></textarea>
+
+
+    <input type="text" id="id_message_send_input" style="width: 750px;margin: 0 auto ; "/>
+    <button type="submit" id="id_message_send_button">Send Message</button>
+    <br/>
+    <br/>
     </div>
     <script>
         const chatSocket = new WebSocket("ws://" + window.location.host + "/");
@@ -30,19 +26,24 @@
         document.querySelector("#id_message_send_input").onkeyup = function (e) {
             if (e.keyCode == 13) {
                 document.querySelector("#id_message_send_button").click();
+                
             }
         };
         document.querySelector("#id_message_send_button").onclick = function (e) {
             let messageInput = document.querySelector(
                 "#id_message_send_input"
             ).value;
+            if (messageInput.length === 0){return 0}
+            document.querySelector("#id_message_send_input").focus();
             chatSocket.send(JSON.stringify({message: messageInput, username: "{{request.user.username}}"}));
         };
         chatSocket.onmessage = function (e) {
             const data = JSON.parse(e.data);
-            let div = data.username + " : " + data.message +"\n    ";
+            let mes = data.username + " : " + data.message + "\n";
             document.querySelector("#id_message_send_input").value = "";
-            document.querySelector("#messages_box").append(div);
+            document.querySelector("#messages_box").append(mes);
+            const messagesBox = document.querySelector('#messages_box');
+            messagesBox.scrollTop = messagesBox.scrollHeight - messagesBox.clientHeight;
         };
     </script>
     </body>
