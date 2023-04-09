@@ -2,6 +2,10 @@
 {% block content %}
     <!DOCTYPE html>
     <html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'chat_page.css' %}">
+    </head>
     <body>
     <div style="text-align: center;"><h1>Hello , Welcome to my chat site {{ request.user }}!</h1></div>
 
@@ -26,7 +30,7 @@
         document.querySelector("#id_message_send_input").onkeyup = function (e) {
             if (e.keyCode == 13) {
                 document.querySelector("#id_message_send_button").click();
-                
+
             }
         };
         document.querySelector("#id_message_send_button").onclick = function (e) {
